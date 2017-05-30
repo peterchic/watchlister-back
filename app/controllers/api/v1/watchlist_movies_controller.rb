@@ -6,15 +6,21 @@ class Api::V1::WatchlistMoviesController < ApplicationController
 	end  
 
   def create
-    watchlist = Watchlist.find(params[:id])
-   	watchlist.movies.create(title: watchlist_movie_params[:movie].title, 
-   							overview: watchlist_movie_params[:movie].overview,
-   							poster_path: watchlist_movie_params[:movie].poster_path,
-   							release_date: watchlist_movie_params[:movie].release_date   )
+  	
+    watchlist = Watchlist.find(watchlist_movie_params[:watchlist_id])
+   	movie = watchlist.movies.create(title: watchlist_movie_params[:movie][:title], 
+   							description: watchlist_movie_params[:movie][:overview],
+   							poster: watchlist_movie_params[:movie][:poster_path],
+   							release_date: watchlist_movie_params[:movie][:release_date]   )
+   	redirect_to action: "index"
+   	
   end
 
+  private
+
  def watchlist_movie_params
-    params.require(:watchlist_movie).permit(:watchlist_id, :movie)
+ 	
+    params.require(:watchlist_movie).permit(:watchlist_id, movie: [:title, :poster_path, :overview, :release_date])
   end
 
 end
