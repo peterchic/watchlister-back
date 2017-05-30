@@ -9,4 +9,15 @@ class Api::V1::MoviesController < ApplicationController
     render json: movie
   end
 
+  def create
+  	movie = Movie.create(movie_params)
+  	render json: movie
+  end
+
+  private
+
+  def movie_params
+  	params.require(:movie).permit(:title, :description, :poster, :release_date)
+  end
+
 end
