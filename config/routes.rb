@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :watchlists, only: [:index, :create, :destroy, :show, :update]
       resources :movies, only: [:index, :show, :create, :destroy, :update]
-      resources :watchlist_movies, only: [:index, :create]
+      resources :watchlist_movies, only: [:index, :create, :destroy]
     end
   end
 end
