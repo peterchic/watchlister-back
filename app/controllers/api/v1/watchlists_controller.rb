@@ -12,15 +12,14 @@ class Api::V1::WatchlistsController < ApplicationController
 
   def show
     watchlist = Watchlist.find(params[:id])
+    # watchlist_movies = watchlist.watchlist_movies
     render json: watchlist
   end
 
   def destroy
     watchlist = Watchlist.find(params[:id])
-    watchlist_movies = WatchlistMovie.where(watchlist_id: params[:id])
-    movies = Movie.where(watchlist_id: params[:id])
-    byebug
-    movies.delete_all
+    watchlist_movies = WatchlistMovie.all.where(watchlist_id: params[:id])
+    # byebug
     watchlist_movies.delete_all
     watchlist.delete
     render json: watchlist

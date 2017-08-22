@@ -18,8 +18,8 @@ class Api::V1::WatchlistMoviesController < ApplicationController
 		movie_association = WatchlistMovie.find_by(movie_id: watchlist_movie_params[:movie_id], watchlist_id: watchlist_movie_params[:watchlist_id])
 		# byebug
 		# movie_id = params[:watchlist_movie][:movie_id]
-		movie = Movie.find(params[:watchlist_movie][:movie_id])
-		movie.delete
+		# movie = Movie.find(params[:watchlist_movie][:movie_id])
+		# movie.delete
 		movie_association.delete
 		render json: movie_association
 	end
